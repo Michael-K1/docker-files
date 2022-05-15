@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett
+    container_name: jackett
+    ports:
+      - 8082:9117
+    environment:
+      - PUID=1026
+      - PGID=65536
+      - TZ="Europe/Rome"
+      - WEBUI_PORT=8082
+    volumes:
+      - /volume1/docker/jackett/config:/config
+      - /volume1/downloads:/downloads
+      - /volume1/plexMedia:/plexMedia
+    restart: unless-stopped
+#     networks:
+#       - default
+# networks:
+#   default:
+#     external: 
+#       name: bridge

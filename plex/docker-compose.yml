@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  plex:
+    image: lscr.io/linuxserver/plex  
+    container_name: Plex
+    network_mode: host
+    hostname: plex.yggdrasil
+    #ports:
+    #  - 32400:32400
+    environment:
+      - PUID=1026
+      - PGID=65536
+      - VERSION=public
+      - PLEX_CLAIM=claim-AVj9g-Vx7nP3CGDkytgj
+      - TZ="Europe/Rome"
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - /volume1/docker/plex/config:/config
+      - /volume1/docker/plex/transcode:/transcode
+      - /volume1/plexMedia:/plexMedia
+    restart: unless-stopped

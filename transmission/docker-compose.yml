@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  transmission:
+    image: lscr.io/linuxserver/transmission
+    container_name: transmission
+    ports:
+      - 8085:9091
+      - 51413:51413
+      - 51413:51413/udp
+    environment:
+      - PUID=1026
+      - PGID=65536
+      - TZ="Europe/Rome"
+      - TRANSMISSION_WEB_HOME=/flood-for-transmission/
+      - TRANSMISSION_RPC_USERNAME=admin
+      - TRANSMISSION_RPC_PASSWORD=Torrent@Transmission
+      - TRANSMISSION_RPC_AUTHENTICATION_REQUIRED=true
+    volumes:
+      - /volume1/docker/transmission/config:/config
+      - /volume1/docker/transmission/watch:/watch
+      - /volume1/downloads:/downloads
+      - /volume1/plexMedia:/media
+    restart: unless-stopped
+#     networks:
+#       - default
+# networks:
+#   default:
+#     external: 
+#       name: bridge
